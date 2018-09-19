@@ -3,7 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var session = require('express-session');
+var flash = require('express-flash');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -19,7 +20,34 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
+app.use('/js', express.static(__dirname + '/node_modules/jquery-validation/dist'));
+
+//session: before routing
+app.use(session({
+  secret: 'ExpressEJSBlank@@', //any string for Security
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(flash()); // after session, before routing
+app.use(flash());// after cookie, session
+
+ // Set session for EJS // after session, before routing
+ app.use(function(req, res, next){
+   res.locals.user = req.session.user;
+   next();
+ });
+
 app.use('/', indexRouter);
+app.use(function(req, res, next){
+   if(req.session.user){
+     next();
+   }else{
+     req.flash('warning', 'authorization failed! Please login');
+     req.flash('forward', req.path);
+     res.redirect('/signin');
+   }
+ });
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
