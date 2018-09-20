@@ -36,4 +36,8 @@ router.post('/login', function(req, res, next) {
   });
 });
 
+/*GET make attendance */
+router.get('/make', function(req,res,next){
+  res.render('attendance/make-attendance')
+});
 module.exports = router;
