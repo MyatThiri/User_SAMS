@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+    <head>
+        <% include ../partial/head %>
+
+    </head>
+
+    <body>
+      <style media="screen">
+        #title {
+          margin-top: 30px;
+          margin-left: 300px;
+        }
+        #menu{
+          /* margin-right:30%; */
+          margin-top: 50px
+        }
+      </style>
+      <header id="header1" class="blue-bg default-header">
+        <div class="navbar-area flex space-between">
+        <div class="left-bar">
+            <div id="title">
+                  <center style="color:white;font-size:45px;font-family:'AR DELANEY';">Student Attendance Management System</center>
+            </div>
+        </div>
+      </div>
+
+          <div class="container" id="menu">
+              <div class="navbar-area flex space-between">
+                  <div class="right-bar flex">
+                      <nav>
+                          <ul id="mobile" class="main-menu  hidden-xs">
+                              <li class="my-active"><a href="/home">Home</a>
+                              </li>
+                              <li><a href="#">Timetable</a>
+                                  <ul class="sub-menu">
+                                      <li><a href="10-course-grid-01.html" >View Timetable</a></li>
+                                  </ul>
+                              </li>
+                              <li><a href="#">Teacher</a>
+                                  <ul class="sub-menu">
+                                      <li><a href="/login" >Teacher</a></li>
+                                      <li><a href="/teacher/make" >Make Attendance</a></li>
+                                      <li><a href="27-teacher-list.html" >View Attendance</a></li>
+                                  </ul>
+                              </li>
+                              <li><a href="#">Logout</a>
+                                <ul class="sub-menu">
+                                    <li><a href="#" >Logout</a></li>
+                              </li>
+                          </ul>
+                      </nav>
+                      <div class="search-icon hidden-xs">
+                          <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </header>
+        <div class="search-area">
+            <div class="container">
+                <div class="row fitscreen flex flex-middle relative">
+                    <form action="#" class="search-form">
+                        <input id="focus" placeholder="Search your query and press “Enter”" type="text">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <section id="slider" class="slider-section">
+            <div class="slider1 deafult-slider slider3">
+                <div id="img" class="item fullscreen flex flex-middle" style="background-image: url(/images/TU-3.jpeg);">
+
+                    <div class="overlay-slider"></div>
+                </div>
+                <div id="img" class="item fullscreen flex flex-middle" style="background-image: url(/images/TU-1.jpeg);">
+
+                    <div class="overlay-slider"></div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!--
+        JavaScripts
+        ========================== -->
+        <!-- <script src="js/vendor/jquery-2.2.4.min.js"></script>
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/vendor/materialize.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.sticky.js"></script>
+        <script src="js/jquery.slicknav.min.js"></script> -->
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqCaX4fFEQRiTJoeclXKZRaFh2fYfps_Y&callback=initMap"></script>
+        <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script> -->
+        <!-- <script src="js/jquery.nice-select.js"></script> -->
+        <!-- <script src="js/jquery.jCounter-0.1.4.js"></script>
+
+        <script src="js/main.js"></script> -->
+        <script src="js/minified/minified.js"></script>
+        <script src="js/map-init.js"></script>
+    </body>
+</html>

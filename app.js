@@ -6,8 +6,9 @@ var logger = require('morgan');
 var session = require('express-session');
 var flash = require('express-flash');
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
+// var usersRouter = require('./routes/users');
+var teacher = require('./routes/teacher/index');
+var student = require('./routes/student/index');
 var app = express();
 
 // view engine setup
@@ -40,16 +41,20 @@ app.use(flash());// after cookie, session
 
 app.use('/', indexRouter);
 app.use(function(req, res, next){
-   if(req.session.user){
+   if(req.session.teacher || req.session.student){
      next();
    }else{
      req.flash('warning', 'authorization failed! Please login');
      req.flash('forward', req.path);
-     res.redirect('/signin');
+     var path = req.path.split('/');
+     console.log(typeof path[1]);
+     (path[1]=='teacher')? res.redirect('/login'): res.redirect('/signin')
+
    }
  });
-app.use('/users', usersRouter);
-
+// app.use('/users', usersRouter);
+app.use('/teacher',teacher);
+app.use('/student',student);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
