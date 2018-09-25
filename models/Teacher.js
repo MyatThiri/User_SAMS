@@ -7,6 +7,11 @@ var Teacher = {
     var sql = 'SELECT * FROM teacher WHERE email = ?';
     return db.query(sql, [email], callback);
   },
+  findById: function(id,callback){
+    console.log('call');
+    var sql = 'SELECT * FROM teacher WHERE tid = ?';
+    return db.query(sql, [id], callback);
+  },
   compare:function(cleartext,encrypted){
     return bcrypt.compareSync(cleartext,encrypted);
   },
