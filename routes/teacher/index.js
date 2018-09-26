@@ -52,7 +52,9 @@ router.get('/list',function(req,res,next){
   });
 });
 
-
+router.get('/weekly',function(req,res,next){
+  res.render('teacher/weekly-attendance',{title: 'Weekly Attendance Count'});
+});
 
 router.use('/users',users);
 

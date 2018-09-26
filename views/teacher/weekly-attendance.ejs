@@ -10,7 +10,7 @@
         height: 35px;
       }
       th {
-        background-color:  	 #009900;
+        background-color:  #e65c00;
         color: white;
         height: 50px;
         font-size: 18px;
@@ -18,7 +18,7 @@
       td {
         color: black;
       }
-      tr:nth-child(even){background-color:#ccffcc;}
+      tr:nth-child(even){background-color:#ffd1b3;}
 
       #title {
         margin-top: 30px;
@@ -120,7 +120,7 @@
             <!-- Blog Slider Area End -->
             <section class="blog-home section-full">
                 <div class="container">
-                    <h2 style="padding-left:20px;">Make Attendance</h2>
+                    <h2 style="padding-left:20px;">Weekly Attendance Count</h2>
                     <div class="total-blog mt-10">
                         <div class="single-blog text-center row">
                             <div class="col-sm-offset-1 col-sm-10">
@@ -128,27 +128,30 @@
                                     <table>
                                       <thead>
                                         <tr>
-                                          <th>Roll No</th>
+                                          <th>Roll No.</th>
                                           <th>Name</th>
-                                          <th><%= subj%></th>
+                                          <th>Count</th>
+                                          <th>Attendance Count</th>
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        <%for(var i=0; i< stulist.length; i++){%>
+
                                           <tr>
-                                            <td><%= stulist[i].roll_no%></td>
-                                            <td><%= stulist[i].stu_name%></td>
-                                            <td><input type="checkbox" id="<%= stulist[i].stu_id%>" value="<%= stulist[i].stu_id%>"></td>
+                                            <td>roll no.</td>
+                                            <td>name</td>
+                                            <td>2</td>
+                                            <td>1</td>
                                           </tr>
-                                        <%}%>
-
-
+                                          <tr>
+                                            <td>roll no.</td>
+                                            <td>name</td>
+                                            <td>2</td>
+                                            <td>1</td>
+                                          </tr>
                                       </tbody>
                                     </table>
                                     <br>
-                                    <div style="margin-left:890px;">
-                                      <input type="button" id="btn" name="btn" value="Save" class="btn btn-primary ">
-                                    </div>
+
                                 </div>
 
                             </div>
@@ -182,23 +185,3 @@
         <script src="/js/map-init.js"></script>
     </body>
 </html>
-<script type="text/javascript">
-$('#btn').click(function () {
-  var att = []
-   <% for (var k=0; k < stulist.length; k++){%>
-     if($('#<%=stulist[k].stu_id%>').prop('checked')) att.push(<%=stulist[k].stu_id%>);
-   <%}%>
-   console.log(att);
-     $.post(
-       '/teacher/assignAtt',
-       {code:'<%=code%>',list:att}
-     ).done(function (res) {
-       if(res.status){
-         alert('success!!!')
-         location.href='/teacher/list';
-       }
-     }).fail(function (err) {
-       console.log(err);
-     })
-});
-</script>
