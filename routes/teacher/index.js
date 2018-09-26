@@ -16,24 +16,49 @@ router.get('/',function(req,res){
 
 /*GET make attendance */
 router.get('/make/:id', function(req,res,next){
-      Subj.findByName(req.params.id,function (err3,rtn3) {
-        if(err3) next(err3);
-        console.log('..//s//s',rtn3[0].code.toLowerCase());
-        FindDB.find(rtn3[0].code.toLowerCase(), function (err4,rtn4) {
+  var a;
+  var d = new Date();
+   switch (d.getMonth()) {
+     case 11:
+       a=1;
+       break;
+     case 0:
+       a=2;
+       break;
+     case 1:
+       a=3;
+       break;
+     case 2:
+       a=4;
+       break;
+     case 5:
+       a=5;
+       break;
+     case 6:
+       a=6;
+       break;
+     case 7:
+       a=7;
+       break;
+     case 8:
+       a=8;
+       break;
+     default:
+       a=1;
+   }
+        FindDB.find(req.params.id,a, function (err4,rtn4) {
           if(err4) next(err4);
           console.log('vnvnvnvn',rtn4);
-          res.render('teacher/make-attendance',{stulist:rtn4,subj:req.params.id,code:rtn3[0].code.toLowerCase()});
+          res.render('teacher/make-attendance',{stulist:rtn4,subj:req.query.s,db:req.params.id,month:a});
         });
-
-  });
 });
 
 router.post('/assignAtt',function (req,res) {
   console.log('/////;//',req.body.list[0]);
-  FindDB.updateAll(req.body.code,function (err2,rtn2) {
+  FindDB.updateAll(req.body.db,req.body.month,req.body.subj,function (err2,rtn2) {
     if(err2) next (err2);
     for (var i in req.body.list) {
-      FindDB.updateAtt(req.body.code,req.body.list[i],function (err,rtn) {
+      FindDB.updateAtt(req.body.db,req.body.list[i],req.body.month,req.body.subj,function (err,rtn) {
         if(err) next (err);
       });
     }
@@ -47,7 +72,7 @@ router.get('/list',function(req,res,next){
     var params = [rtn[0].name,rtn[0].dept_id];
     Timetable.findWithTec(params,function (err2,rtn2) {
       if(err2) next (err2);
-      res.render('teacher/attendance-list', {title: 'Attendance List',list:rtn2});
+      res.render('teacher/attendance-list', {title: 'Attendance List',list:rtn2,dept:rtn[0].dept_id});
     });
   });
 });

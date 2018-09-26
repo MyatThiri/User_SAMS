@@ -1,16 +1,16 @@
 var db = require('../dbcon');
 
 var FindDB = {
-  find: function(name,callback){
-    var sql = 'SELECT a.*, b.roll_no FROM '+name+' AS a JOIN student AS b ON a.stu_id = b.sid';
+  find: function(name,m,callback){
+    var sql = 'SELECT a.*, b.roll_no FROM '+name+' AS a JOIN student AS b ON a.stu_id = b.sid WHERE month='+m;
     return db.query(sql,[name],callback);
   },
-  updateAtt: function (name,id,callback) {
-    var sql = 'UPDATE '+name+' SET count = count + 1 WHERE stu_id = '+id+'';
+  updateAtt: function (name,id,m,subj,callback) {
+    var sql = 'UPDATE '+name+' SET '+subj+'_acount = '+subj+'_acount + 1 WHERE stu_id = '+id+' AND month = '+m+'';
     return db.query(sql,[name],callback);
   },
-  updateAll: function (name,callback) {
-    var sql = 'UPDATE '+name+' SET att_count = att_count + 1';
+  updateAll: function (name,m,subj,callback) {
+    var sql = 'UPDATE '+name+' SET '+subj+'_count = '+subj+'_count + 1 WHERE month = '+m+'';
     return db.query(sql,[name],callback);
   }
 };

@@ -183,6 +183,7 @@
     </body>
 </html>
 <script type="text/javascript">
+
 $('#btn').click(function () {
   var att = []
    <% for (var k=0; k < stulist.length; k++){%>
@@ -191,7 +192,7 @@ $('#btn').click(function () {
    console.log(att);
      $.post(
        '/teacher/assignAtt',
-       {code:'<%=code%>',list:att}
+       {db:'<%=db%>',month:'<%=month%>',subj:'<%=subj%>',list:att}
      ).done(function (res) {
        if(res.status){
          alert('success!!!')

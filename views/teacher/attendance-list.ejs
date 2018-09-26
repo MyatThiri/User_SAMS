@@ -178,8 +178,34 @@
         <script src="/js/map-init.js"></script>
     </body>
     <script type="text/javascript">
+    var major ;
+    switch (<%=dept%>) {
+      case 1:
+        major="it";
+        break;
+      case 2:
+        major="civil";
+        break;
+      case 3:
+        major="ec";
+        break;
+      case 4:
+        major="ep";
+        break;
+      case 5:
+        major="mp";
+        break;
+      case 6:
+        major="mc";
+        break;
+      default:
+        console.log('it');
+    }
+    console.log('////',major);
+    var cla = '<%=list[0].class%>'+major;
+    console.log(cla.toLowerCase());
       function go(name) {
-        location.href = '/teacher/make/'+name;
+        location.href = '/teacher/make/'+cla.toLowerCase()+'?s='+name;
       }
     </script>
 </html>
