@@ -41,7 +41,31 @@ router.get('/monthly', function(req,res,next){
 router.get('/timetable', function(req,res,next){
   Student.findById(req.session.student.sid,function (err,rtn) {
     if(err) next (err);
-    var classN = [rtn[0].class,rtn[0].dept_id];
+    var query;
+    switch (rtn[0].class) {
+      case '6BE':
+         query=')';
+        break;
+        case '5BE':
+           query=' OR dept_id = 7)';
+          break;
+        case '4BE':
+           query=' OR dept_id = 7 OR dept_id = 8)';
+          break;
+        case '3BE':
+           query=' OR dept_id = 7 OR dept_id = 8)';
+          break;
+        case '2BE':
+           query=' OR dept_id = 7 OR dept_id = 8)';
+          break;
+        case '1BE':
+           query=' OR dept_id = 7 OR dept_id = 8 OR dept_id = 9 OR dept_id = 10  OR dept_id = 11)';
+          break;
+      default:
+
+    }
+    console.log(query);
+    var classN = [rtn[0].class,rtn[0].dept_id,query];
     Timetable.findClass(classN,function (err2,rtn2) {
       if(err2) next (err2);
       console.log(rtn2);

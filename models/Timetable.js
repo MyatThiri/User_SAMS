@@ -27,7 +27,8 @@ var Timetable = {
   },
 
   findClass:function (params,callback) {
-    var sql = "SELECT subj_name, time, date_id FROM timetable WHERE class = ?  AND dept_id = ? ";
+    var sql = 'SELECT subj_name, time, date_id FROM timetable WHERE class = ?  AND (dept_id = ? '+params[2]+' ';
+    console.log(sql);
     return db.query(sql,params,callback);
   },
 
