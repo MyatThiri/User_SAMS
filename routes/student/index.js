@@ -3,6 +3,7 @@ var router = express.Router();
 var Student = require('../../models/Student');
 var Subj = require('../../models/Subj');
 var Attendance = require('../../models/Attendance');
+var Timetable = require('../../models/Timetable');
 var FindDB = require('../../models/FindDB');
 
 //student role check
@@ -36,4 +37,17 @@ router.get('/monthly', function(req,res,next){
 
   })
 });
+
+router.get('/timetable', function(req,res,next){
+  Student.findById(req.session.student.sid,function (err,rtn) {
+    if(err) next (err);
+    var classN = [rtn[0].class,rtn[0].dept_id];
+    Timetable.findClass(classN,function (err2,rtn2) {
+      if(err2) next (err2);
+      console.log(rtn2);
+      res.render('student/timetable', {title:'Timetable',list:rtn2});
+    });
+  });
+});
+
 module.exports = router;

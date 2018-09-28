@@ -26,6 +26,11 @@ var Timetable = {
     return db.query(sql,params,callback);
   },
 
+  findClass:function (params,callback) {
+    var sql = "SELECT subj_name, time, date_id FROM timetable WHERE class = ?  AND dept_id = ? ";
+    return db.query(sql,params,callback);
+  },
+
   update: function(params,callback){
     var sql = "UPDATE timetable SET dept_id =?, name =?, subj_name =?, class =?, start_time =?, end_time =?,date_id =?,updated = NOW() WHERE tb_id = ?";
     return db.query(sql,params,callback);

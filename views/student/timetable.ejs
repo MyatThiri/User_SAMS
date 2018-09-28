@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+    <% include ../partial/head %>
+    <style media="screen">
+      table,th,td{
+        width: 1100px;
+        margin-left: -80px;
+        text-align: center;
+        border: 1px solid black;
+
+      }
+      th {
+        background-color:  white;
+        color: black;
+        height: 80px;
+        font-size: 18px;
+      }
+      td {
+        color: black;
+        height: 70px;
+        font-size: 16px;
+      }
+      /* tr:nth-child(even){background-color:#809fff;} */
+
+      #title {
+        margin-top: 30px;
+        margin-left: 300px;
+      }
+      #menu{
+        /* margin-right:30%; */
+        margin-top: 50px
+      }
+    </style>
+    <script src="/js/vendor/jquery-2.2.4.min.js"></script>
+    <header id="header1" class="blue-bg default-header">
+      <div class="navbar-area flex space-between">
+      <div class="left-bar">
+          <div id="title">
+                <center style="color:white;font-size:45px;font-family:'AR DELANEY';">Student Attendance Management System</center>
+          </div>
+      </div>
+    </div>
+
+    <div class="container" id="menu">
+        <div class="navbar-area flex space-between">
+            <div class="right-bar flex">
+                <nav>
+                    <ul id="mobile" class="main-menu  hidden-xs">
+                        <li class="my-active"><a href="/home">Home</a>
+                        </li>
+                        <li><a href="#">Timetable</a>
+                            <ul class="sub-menu">
+                                <li><a href="/student/timetable" >View Timetable</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Student</a>
+                            <ul class="sub-menu">
+                                <li><a href="/student/monthly">View Attendance</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Logout</a>
+                          <ul class="sub-menu">
+                              <li><a href="/signout" >Logout</a></li>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+    </header>
+    <body>
+        <div class="search-area">
+            <div class="container">
+                <div class="row fitscreen flex flex-middle relative">
+                    <form action="#" class="search-form">
+                        <input id="focus" placeholder="Search your query and press “Enter”" type="text">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <main>
+            <!-- Blog Slider Area Start -->
+            <section id="slider" class="slider-section">
+                <div class="deafult-slider blog-slider">
+                    <div class="item flex flex-middle" style="background-image: url(/images/TU-1.jpeg);">
+                        <div class="container">
+                            <div class="col-md-offset-1 col-md-10  col-xs-12">
+                                <div class="slide-content text-center">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="overlay-slider"></div>
+                    </div>
+                    <div class="item flex flex-middle" style="background-image: url(/images/TU-3.jpeg);">
+                        <div class="container">
+                            <div class="col-md-offset-1 col-md-10 col-xs-12">
+                                <div class="slide-content text-center">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="overlay-slider"></div>
+                    </div>
+                    <div class="item flex flex-middle" style="background-image: url(/images/TU-2.jpeg);">
+                        <div class="container">
+                            <div class="col-md-offset-1 col-md-10 col-xs-12">
+                                <div class="slide-content text-center">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="overlay-slider"></div>
+                    </div>
+                </div>
+            </section>
+            <!-- Blog Slider Area End -->
+            <section class="blog-home section-full">
+                <div class="container">
+                    <h2 style="padding-left:20px;">Timetable</h2>
+                    <br>
+                    <div class="total-blog mt-10">
+                        <div class="single-blog text-center row">
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <div class="blog-head mb-20">
+                                  <table>
+                                    <thead>
+                                      <tr>
+                                        <th>Date & Time</th>
+                                        <th>1 <p> 8:30-9:30</th>
+                                        <th>2 <p> 9:35-10:35</th>
+                                        <th>3 <p> 10:40-11:40</th>
+                                        <th>4 <p> 12:40-1:40</th>
+                                        <th>5 <p> 1:45-2:45</th>
+                                        <th>6 <p> 2:50-3:50</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr style="background-color: #ffd480">
+                                        <td >Monday</td>
+                                        <td id="d1s1"></td>
+                                        <td id="d1s2"></td>
+                                        <td id="d1s3"></td>
+                                        <td id="d1s4"></td>
+                                        <td id="d1s5"></td>
+                                        <td id="d1s6"></td>
+                                      </tr>
+                                      <tr style="background-color: #33d6ff">
+                                        <td >Tuesday</td>
+                                        <td id="d2s1"></td>
+                                        <td id="d2s2"></td>
+                                        <td id="d2s3"></td>
+                                        <td id="d2s4"></td>
+                                        <td id="d2s5"></td>
+                                        <td id="d2s6"></td>
+                                      </tr>
+                                      <tr style="background-color: #ff99cc">
+                                        <td>Wednesday</td>
+                                        <td id="d3s1"></td>
+                                        <td id="d3s2"></td>
+                                        <td id="d3s3"></td>
+                                        <td id="d3s4"></td>
+                                        <td id="d3s5"></td>
+                                        <td id="d3s6"></td>
+                                      </tr>
+                                      <tr style="background-color: #99e699">
+                                        <td>Thursday</td>
+                                        <td id="d4s1"></td>
+                                        <td id="d4s2"></td>
+                                        <td id="d4s3"></td>
+                                        <td id="d4s4"></td>
+                                        <td id="d4s5"></td>
+                                        <td id="d4s6"></td>
+                                      </tr>
+                                      <tr style="background-color: #e580ff">
+                                        <td>Friday</td>
+                                        <td id="d5s1"></td>
+                                        <td id="d5s2"></td>
+                                        <td id="d5s3"></td>
+                                        <td id="d5s4"></td>
+                                        <td id="d5s5"></td>
+                                        <td id="d5s6"></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer Area Start -->
+
+        <!-- Footer Area End -->
+
+
+        <!--
+        JavaScripts
+        ========================== -->
+
+        <!-- <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/vendor/materialize.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.sticky.js"></script>
+        <script src="js/jquery.slicknav.min.js"></script> -->
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqCaX4fFEQRiTJoeclXKZRaFh2fYfps_Y&callback=initMap"></script>
+        <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script> -->
+        <!-- <script src="js/jquery.nice-select.js"></script> -->
+        <!-- <script src="js/jquery.jCounter-0.1.4.js"></script>
+
+        <script src="js/main.js"></script> -->
+        <script src="/js/minified/minified.js"></script>
+        <script src="/js/map-init.js"></script>
+    </body>
+    <script type="text/javascript">
+    console.log(<%=list.length%>);
+      <% for(var i = 0; i<list.length;i++){%>
+          switch (<%=list[i].date_id%>) {
+            case 1:
+              switch (<%=list[i].time%>) {
+                case 1:
+                  $('#d1s1').html('<%=list[i].subj_name%>');
+                  console.log('<%=list[i].subj_name%>',<%=i%>);
+                  break;
+                case 2:
+                  $('#d1s2').html('<%=list[i].subj_name%>');
+                  break;
+                case 3:
+                  $('#d1s3').html('<%=list[i].subj_name%>');
+                  break;
+                case 4:
+                  $('#d1s4').html('<%=list[i].subj_name%>');
+                  break;
+                case 5:
+                  $('#d1s5').html('<%=list[i].subj_name%>');
+                  break;
+                case 6:
+                  $('#d1s6').html('<%=list[i].subj_name%>');
+                  break;
+                default:
+
+              }
+              break;
+            case 2:
+              switch (<%=list[i].time%>) {
+                case 1:
+                  $('#d2s1').html('<%=list[i].subj_name%>');
+                  break;
+                case 2:
+                  $('#d2s2').html('<%=list[i].subj_name%>');
+                  break;
+                case 3:
+                  $('#d2s3').html('<%=list[i].subj_name%>');
+                  break;
+                case 4:
+                  $('#d2s4').html('<%=list[i].subj_name%>');
+                  break;
+                case 5:
+                  $('#d2s5').html('<%=list[i].subj_name%>');
+                  break;
+                case 6:
+                  $('#d2s6').html('<%=list[i].subj_name%>');
+                  break;
+                default:
+
+              }
+              break;
+            case 3:
+              switch (<%=list[i].time%>) {
+                case 1:
+                  $('#d3s1').html('<%=list[i].subj_name%>');
+                  break;
+                case 2:
+                  $('#d3s2').html('<%=list[i].subj_name%>');
+                  break;
+                case 3:
+                  $('#d3s3').html('<%=list[i].subj_name%>');
+                  break;
+                case 4:
+                  $('#d3s4').html('<%=list[i].subj_name%>');
+                  break;
+                case 5:
+                  $('#d3s5').html('<%=list[i].subj_name%>');
+                  break;
+                case 6:
+                  $('#d3s6').html('<%=list[i].subj_name%>');
+                  break;
+                default:
+
+              }
+              break;
+            case 4:
+              switch (<%=list[i].time%>) {
+                case 1:
+                  $('#d4s1').html('<%=list[i].subj_name%>');
+                  break;
+                case 2:
+                  $('#d4s2').html('<%=list[i].subj_name%>');
+                  break;
+                case 3:
+                  $('#d4s3').html('<%=list[i].subj_name%>');
+                  break;
+                case 4:
+                  $('#d4s4').html('<%=list[i].subj_name%>');
+                  break;
+                case 5:
+                  $('#d4s5').html('<%=list[i].subj_name%>');
+                  break;
+                case 6:
+                  $('#d4s6').html('<%=list[i].subj_name%>');
+                  break;
+                default:
+
+              }
+              break;
+            case 5:
+              switch (<%=list[i].time%>) {
+                case 1:
+                  $('#d5s1').html('<%=list[i].subj_name%>');
+                  break;
+                case 2:
+                  $('#d5s2').html('<%=list[i].subj_name%>');
+                  break;
+                case 3:
+                  $('#d5s3').html('<%=list[i].subj_name%>');
+                  break;
+                case 4:
+                  $('#d5s4').html('<%=list[i].subj_name%>');
+                  break;
+                case 5:
+                  $('#d5s5').html('<%=list[i].subj_name%>');
+                  break;
+                case 6:
+                  $('#d5s6').html('<%=list[i].subj_name%>');
+                  break;
+                default:
+
+              }
+              break;
+            default:
+
+          }
+      <%}%>
+    </script>
+</html>
