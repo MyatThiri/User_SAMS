@@ -148,7 +148,7 @@
                                               <% suma += data[k][mon[b][1]];  %>
                                               <td><%=data[k][mon[b][0]]%></td>
                                               <td><%=data[k][mon[b][1]]%></td>
-                                              <td><%=(data[k][mon[b][1]] == 0)? 0:(data[k][mon[b][1]]/data[k][mon[b][0]])*100%>%</td>
+                                              <td ><%=(data[k][mon[b][1]] == 0)? 0:(data[k][mon[b][1]]/data[k][mon[b][0]])*100%>%</td>
                                             <%}%>
 
                                             <td><%=(suma == 0)? 0 :((suma/sumc)*100).toFixed(2) %> %</td>
@@ -186,12 +186,12 @@
                                           </script>
                                           <% console.log(alla[k],allc[k])%>
                                         <%}%>
-                                        <tr>
+                                        <tr style="background-color:#ffff66; height:50px;">
                                           <td>Total</td>
                                           <% var tola = 0;var tolc = 0; for(var b =0; b< subj.length; b++){  tola += alla[b]; tolc += allc[b];%>
                                             <td><%= allc[b] %></td>
                                             <td><%= alla[b] %></td>
-                                            <td><%= (alla[b] == 0)? 0:((alla[b]/allc[b])*100).toFixed(2) %> %</td>
+                                            <td ><%= (alla[b] == 0)? 0:((alla[b]/allc[b])*100).toFixed(2) %> %</td>
                                           <%} %>
                                           <% console.log(tola,tolc)%>
                                           <td><%= ((tola/tolc)*100).toFixed(2)%> %</td>
