@@ -10,17 +10,15 @@
         height: 35px;
       }
       th {
-        background-color:  #550080;
+        background-color:  #0000b3;
         color: white;
-        height: 55px;
-        font-size: 23px;
-      }
-      td {
-        color: black;
         height: 50px;
         font-size: 18px;
       }
-      tr:nth-child(even){background-color: #eeccff;}
+      td {
+        color: black;
+      }
+      tr:nth-child(even){background-color:#ccccff;}
 
       #title {
         margin-top: 30px;
@@ -46,33 +44,25 @@
             <div class="right-bar flex">
                 <nav>
                     <ul id="mobile" class="main-menu  hidden-xs">
-                        <li class="my-active"><a href="/teacher/home">Home</a>
+                        <li class="my-active"><a href="/home">Home</a>
                         </li>
                         <li><a href="#">Timetable</a>
                             <ul class="sub-menu">
                                 <li><a href="10-course-grid-01.html" >View Timetable</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Teacher</a>
+                        <li><a href="#">Student</a>
                             <ul class="sub-menu">
-                                 <li><a href="/teacher/list" >Attendance List</a></li>
-                                <li><a href="/teacher/monthly" >View Monthly Attendance Count</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Password</a>
-                            <ul class="sub-menu">
-                                <li><a href="/teacher/password" >Change Password</a></li>
+                                <li><a href="/student/monthly">View Attendance</a></li>
                             </ul>
                         </li>
                         <li><a href="#">Logout</a>
                           <ul class="sub-menu">
-                              <li><a href="/" >Logout</a></li>
+                              <li><a href="/signout" >Logout</a></li>
                         </li>
                     </ul>
                 </nav>
-                <div class="search-icon hidden-xs">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                </div>
+
             </div>
         </div>
     </div>
@@ -126,59 +116,89 @@
             <!-- Blog Slider Area End -->
             <section class="blog-home section-full">
                 <div class="container">
-
-                    <h2 style="padding-left:20px;">Attendance List</h2>
+                    <h2 style="padding-left:20px;">Monthly Attendance Percetage Count</h2>
+                    <br>
                     <div class="total-blog mt-10">
                         <div class="single-blog text-center row">
                             <div class="col-sm-offset-1 col-sm-10">
                                 <div class="blog-head mb-20">
+                                  <h3 style="color: #ff6600;font-family: Times New Roman;"><%= classN%></h3>
+                                  <h3 style="color: #ff6600; font-family: Times New Roman;"><%= stu %></h3>
+                                  <br>
                                     <table>
                                       <thead>
                                         <tr>
-                                          <th>Class</th>
-                                          <th>Subj</th>
-                                          <th>Time</th>
+                                          <th>Month</th>
+                                          <% for(var j = 0; j< subj.length; j++){%>
+                                            <th colspan="3"><%= subj[j].subj_name%></th>
+                                          <%}%>
+                                          <th>Rating</th>
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        <%if(list != '0'){%>
-                                        <% for(var i= 0; i< list.length; i++){%>
-                                          <tr onclick="go('<%=list[i].subj_name%>','<%= list[i].time%>')">
-                                            <td><%= list[i].class%></td>
-                                            <td><%= list[i].subj_name%></td>
-                                            <td id="id<%=i%>"><%= list[i].time%></td>
+                                        <% var allc = []; var alla = [];  for(var p=0; p<= subj.length; p++){ allc[p]=0;alla[p]=0;} %>
+                                        <%for(var k =0; k< data.length; k++){ var sumc = 0; var suma = 0; %>
+
+
+                                          <tr>
+                                            <td id="aa<%=k%>"><%= data[k].month%></td>
+                                            <% for(var b = 0; b < mon.length; b++){ %>
+                                              <% allc[b] += data[k][mon[b][0]]; alla[b] += data[k][mon[b][1]];%>
+                                              <% sumc += data[k][mon[b][0]];  %>
+                                              <% suma += data[k][mon[b][1]];  %>
+                                              <td><%=data[k][mon[b][0]]%></td>
+                                              <td><%=data[k][mon[b][1]]%></td>
+                                              <td><%=(data[k][mon[b][1]] == 0)? 0:(data[k][mon[b][1]]/data[k][mon[b][0]])*100%>%</td>
+                                            <%}%>
+
+                                            <td><%=(suma == 0)? 0 :((suma/sumc)*100).toFixed(2) %> %</td>
                                           </tr>
+
                                           <script type="text/javascript">
-                                            switch ('<%=list[i].time%>') {
-                                              case "1":
-                                                $('#id<%=i%>').html("8:30AM-9:30AM");
+                                            switch (<%=data[k].month%>) {
+                                              case 1:
+                                                $('#aa<%=k%>').html('December');
                                                 break;
-                                              case "2":
-                                                $('#id<%=i%>').html("9:35AM-10:35AM");
+                                              case 2:
+                                                $('#aa<%=k%>').html('January');
+                                              break;
+                                              case 3:
+                                                $('#aa<%=k%>').html('February');
+                                              break;
+                                              case 4:
+                                                $('#aa<%=k%>').html('March');
+                                              break;
+                                              case 5:
+                                                $('#aa<%=k%>').html('June');
+                                              break;
+                                              case 6:
+                                                $('#aa<%=k%>').html('July');
                                                 break;
-                                              case "3":
-                                                $('#id<%=i%>').html("10:40AM-11:40AM");
+                                              case 7:
+                                                $('#aa<%=k%>').html('August');
                                                 break;
-                                              case "4":
-                                                $('#id<%=i%>').html("12:40PM-1:40PM");
-                                                break;
-                                              case "5":
-                                                $('#id<%=i%>').html("1:45PM-2:45PM");
-                                                break;
-                                              case "6":
-                                                $('#id<%=i%>').html("2:50PM-3:50PM");
+                                              case 8:
+                                                $('#aa<%=k%>').html('September');
                                                 break;
                                               default:
-                                                $('#id<%=i%>').html("somethings wrong");
+                                                console.log('error');
                                             }
                                           </script>
+                                          <% console.log(alla[k],allc[k])%>
                                         <%}%>
-                                        <%}else{%>
-                                          <tr>
-                                            <td colspan="3">Data Not Found for today!!</td>
-                                          </tr>
-                                        <%}%>
-                                      </tbody>
+                                        <tr>
+                                          <td>Total</td>
+                                          <% var tola = 0;var tolc = 0; for(var b =0; b< subj.length; b++){  tola += alla[b]; tolc += allc[b];%>
+                                            <td><%= allc[b] %></td>
+                                            <td><%= alla[b] %></td>
+                                            <td><%= (alla[b] == 0)? 0:((alla[b]/allc[b])*100).toFixed(2) %> %</td>
+                                          <%} %>
+                                          <% console.log(tola,tolc)%>
+                                          <td><%= ((tola/tolc)*100).toFixed(2)%> %</td>
+                                        </tr>
+
+
+                                    </tbody>
                                     </table>
                                     <br>
 
@@ -214,51 +234,4 @@
         <script src="/js/minified/minified.js"></script>
         <script src="/js/map-init.js"></script>
     </body>
-    <script type="text/javascript">
-    var major ;
-    switch (<%=dept%>) {
-      case 1:
-        major="it";
-        break;
-      case 2:
-        major="civil";
-        break;
-      case 3:
-        major="ec";
-        break;
-      case 4:
-        major="ep";
-        break;
-      case 5:
-        major="mp";
-        break;
-      case 6:
-        major="mc";
-        break;
-      default:
-        console.log('it');
-    }
-    console.log('////',major);
-    if('<%=list%>' == '0'){
-      var cla = '';
-    }else {
-      var cla ='<%=list[0].class%>'+major;
-    }
-
-    console.log(cla.toLowerCase());
-    var sts = false;
-
-      function go(name,time) {
-        <%for(var h in ca_list.list){%>
-            if(time == '<%= ca_list.list[h]%>') sts = true;
-        <%}%>
-        if(!sts){
-          location.href = '/teacher/make/'+cla.toLowerCase()+'?s='+name+'&t='+time;
-        }else {
-          alert("You already do it");
-          sts= false;
-        }
-
-      }
-    </script>
 </html>

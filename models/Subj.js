@@ -25,6 +25,11 @@ var Subj = {
     var sql = "SELECT code FROM subject WHERE subj_name = ?";
     return db.query (sql,[name],callback);
   },
+  findByTwo: function(name,id,callback){
+    var sql = "SELECT subj_name FROM subject WHERE class = '"+name+"' AND dept_id = "+id+"";
+    return db.query (sql,[name],callback);
+  },
+
 
   find: function(params, callback){
     var sql = "SELECT s.subj_id, s.subj_name, s.code,s.class, s.dept_id, DATE_FORMAT(s.updated, '%d/%m/%Y %H:%i') AS updated, d.dept_name FROM subject AS s JOIN dept AS d USING(dept_id)";

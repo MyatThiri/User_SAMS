@@ -16,6 +16,10 @@ var FindDB = {
   findAtt: function (name,dbN,callback) {
     var sql = 'SELECT a.stu_name,b.roll_no, a.'+name+'_count AS count, a.'+name+'_acount AS acount, a.month FROM '+dbN+' AS a JOIN student AS b ON a.stu_id = b.sid';
     return db.query(sql,[name],callback);
+  },
+  findStu: function (dbN,sid,callback) {
+    var sql = 'SELECT * FROM '+dbN+' WHERE stu_id='+sid+'';
+    return db.query(sql,[sid],callback);
   }
 };
 
