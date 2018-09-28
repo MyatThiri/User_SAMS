@@ -31,6 +31,7 @@
         margin-top: 50px
       }
     </style>
+    <script src="/js/vendor/jquery-2.2.4.min.js"></script>
     <header id="header1" class="blue-bg default-header">
       <div class="navbar-area flex space-between">
       <div class="left-bar">
@@ -54,10 +55,14 @@
                             </li>
                             <li><a href="#">Teacher</a>
                                 <ul class="sub-menu">
-                                    <li><a href="/login" >Teacher</a></li>
                                     <li><a href="/teacher/list" >Attendance List</a></li>
                                     <li><a href="/teacher/weekly" >View Weekly Attendance Count</a></li>
                                     <li><a href="27-teacher-list.html" >View Monthly Attendance Count</a></li>                                </ul>
+                            </li>
+                            <li><a href="#">Password</a>
+                                <ul class="sub-menu">
+                                    <li><a href="/teacher/password" >Change Password</a></li>
+                                </ul>
                             </li>
                             <li><a href="#">Logout</a>
                               <ul class="sub-menu">
@@ -132,13 +137,45 @@
                                         <tr>
                                           <th>Class</th>
                                           <th>Subj</th>
+                                          <th>Time</th>
                                         </tr>
                                       </thead>
                                       <tbody>
+                                        <%if(list != '0'){%>
                                         <% for(var i= 0; i< list.length; i++){%>
-                                          <tr onclick="go('<%=list[i].subj_name%>')">
+                                          <tr onclick="go('<%=list[i].subj_name%>','<%= list[i].time%>')">
                                             <td><%= list[i].class%></td>
                                             <td><%= list[i].subj_name%></td>
+                                            <td id="id<%=i%>"><%= list[i].time%></td>
+                                          </tr>
+                                          <script type="text/javascript">
+                                            switch ('<%=list[i].time%>') {
+                                              case "1":
+                                                $('#id<%=i%>').html("8:30AM-9:30AM");
+                                                break;
+                                              case "2":
+                                                $('#id<%=i%>').html("9:35AM-10:35AM");
+                                                break;
+                                              case "3":
+                                                $('#id<%=i%>').html("10:40AM-11:40AM");
+                                                break;
+                                              case "4":
+                                                $('#id<%=i%>').html("12:40PM-1:40PM");
+                                                break;
+                                              case "5":
+                                                $('#id<%=i%>').html("1:45PM-2:45PM");
+                                                break;
+                                              case "6":
+                                                $('#id<%=i%>').html("2:50PM-3:50PM");
+                                                break;
+                                              default:
+                                                $('#id<%=i%>').html("somethings wrong");
+                                            }
+                                          </script>
+                                        <%}%>
+                                        <%}else{%>
+                                          <tr>
+                                            <td colspan="3">Data Not Found for today!!</td>
                                           </tr>
                                         <%}%>
                                       </tbody>
@@ -162,7 +199,7 @@
         <!--
         JavaScripts
         ========================== -->
-        <script src="/js/vendor/jquery-2.2.4.min.js"></script>
+
         <!-- <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/vendor/materialize.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
@@ -202,10 +239,26 @@
         console.log('it');
     }
     console.log('////',major);
-    var cla = '<%=list[0].class%>'+major;
+    if('<%=list%>' == '0'){
+      var cla = '';
+    }else {
+      var cla ='<%=list[0].class%>'+major;
+    }
+
     console.log(cla.toLowerCase());
-      function go(name) {
-        location.href = '/teacher/make/'+cla.toLowerCase()+'?s='+name;
+    var sts = false;
+
+      function go(name,time) {
+        <%for(var h in ca_list.list){%>
+            if(time == '<%= ca_list.list[h]%>') sts = true;
+        <%}%>
+        if(!sts){
+          location.href = '/teacher/make/'+cla.toLowerCase()+'?s='+name+'&t='+time;
+        }else {
+          alert("You already do it");
+          sts= false;
+        }
+
       }
     </script>
 </html>

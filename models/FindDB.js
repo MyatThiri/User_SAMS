@@ -12,6 +12,10 @@ var FindDB = {
   updateAll: function (name,m,subj,callback) {
     var sql = 'UPDATE '+name+' SET '+subj+'_count = '+subj+'_count + 1 WHERE month = '+m+'';
     return db.query(sql,[name],callback);
+  },
+  findAtt: function (name,dbN,callback) {
+    var sql = 'SELECT a.stu_name,b.roll_no, a.'+name+'_count AS count, a.'+name+'_acount AS acount, a.month FROM '+dbN+' AS a JOIN student AS b ON a.stu_id = b.sid';
+    return db.query(sql,[name],callback);
   }
 };
 

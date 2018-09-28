@@ -49,11 +49,16 @@ router.get('/make/:id', function(req,res,next){
         FindDB.find(req.params.id,a, function (err4,rtn4) {
           if(err4) next(err4);
           console.log('vnvnvnvn',rtn4);
-          res.render('teacher/make-attendance',{stulist:rtn4,subj:req.query.s,db:req.params.id,month:a});
+          res.render('teacher/make-attendance',{stulist:rtn4,subj:req.query.s,time:req.query.t,db:req.params.id,month:a});
         });
 });
 
 router.post('/assignAtt',function (req,res) {
+  console.log('do!!!',req.cookies.items);
+  var list =(req.cookies.items)? req.cookies.items.list:[];
+  console.log('do2222');
+  list.push(req.body.time);
+  res.cookie('items',{list:list}, {maxAge:43200});
   console.log('/////;//',req.body.list[0]);
   FindDB.updateAll(req.body.db,req.body.month,req.body.subj,function (err2,rtn2) {
     if(err2) next (err2);
@@ -67,20 +72,73 @@ router.post('/assignAtt',function (req,res) {
 });
 
 router.get('/list',function(req,res,next){
+  var ca_list = (req.cookies.items)? req.cookies.items:[];
+  console.log('//././',ca_list);
+  var d = new Date();
+  day = d.getDay();
   Teacher.findById(req.session.teacher.tid,function (err,rtn) {
     if(err) next(err);
-    var params = [rtn[0].name,rtn[0].dept_id];
+    var params = [rtn[0].name,rtn[0].dept_id,day];
     Timetable.findWithTec(params,function (err2,rtn2) {
       if(err2) next (err2);
-      res.render('teacher/attendance-list', {title: 'Attendance List',list:rtn2,dept:rtn[0].dept_id});
+      console.log(rtn2);
+      if(rtn2.length == 0){
+        console.log(typeof rtn2,rtn2);
+      }
+      var data = (rtn2.length ==0)? '0' : rtn2;
+      console.log(data);
+      res.render('teacher/attendance-list', {title: 'Attendance List',list:data,dept:rtn[0].dept_id, ca_list: ca_list});
     });
   });
 });
 
-router.get('/weekly',function(req,res,next){
-  res.render('teacher/weekly-attendance',{title: 'Weekly Attendance Count'});
+router.get('/monthly',function(req,res,next){
+  var major ;
+  Teacher.findById(req.session.teacher.tid,function (err,rtn) {
+    if(err) next(err);
+
+    switch (rtn[0].dept_id) {
+      case 1:
+        major="it";
+        break;
+      case 2:
+        major="civil";
+        break;
+      case 3:
+        major="ec";
+        break;
+      case 4:
+        major="ep";
+        break;
+      case 5:
+        major="mp";
+        break;
+      case 6:
+        major="mc";
+        break;
+      default:
+        console.log('it');
+    }
+    var params = [rtn[0].name,rtn[0].dept_id]
+    Timetable.findWithTecA(params,function (err2,rtn2) {
+      if(err2) next(err2);
+      console.log(rtn2[0]);
+      var db = rtn2[0].class+major;
+      FindDB.findAtt(rtn2[0].subj_name,db,function (err3,rtn3) {
+        if(err3) next(err3);
+        console.log(rtn3);
+        res.render('teacher/monthly-attendance',{title: 'monthly Attendance Count',list:rtn3,sub_c:rtn2[0].subj_name+'_count',sub_a:rtn2[0].subj_name+'_acount'});
+      });
+
+    });
+  });
+
 });
 
+
+router.get('/password',function(req,res,next){
+  res.render('teacher/password',{title: 'Change Password'});
+});
 router.use('/users',users);
 
 module.exports = router;

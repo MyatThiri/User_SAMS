@@ -10,7 +10,7 @@
         height: 35px;
       }
       th {
-        background-color:  	 #009900;
+        background-color:  #e65c00;
         color: white;
         height: 50px;
         font-size: 18px;
@@ -18,7 +18,7 @@
       td {
         color: black;
       }
-      tr:nth-child(even){background-color:#ccffcc;}
+      tr:nth-child(even){background-color:#ffd1b3;}
 
       #title {
         margin-top: 30px;
@@ -29,6 +29,7 @@
         margin-top: 50px
       }
     </style>
+    <script src="/js/vendor/jquery-2.2.4.min.js"></script>
     <header id="header1" class="blue-bg default-header">
       <div class="navbar-area flex space-between">
       <div class="left-bar">
@@ -52,7 +53,7 @@
                             </li>
                             <li><a href="#">Teacher</a>
                                 <ul class="sub-menu">
-                                     <li><a href="/teacher/list" >Attendance List</a></li>
+                                    <li><a href="/teacher/list" >Attendance List</a></li>
                                     <li><a href="/teacher/weekly" >View Weekly Attendance Count</a></li>
                                     <li><a href="27-teacher-list.html" >View Monthly Attendance Count</a></li>
                                 </ul>
@@ -124,7 +125,7 @@
             <!-- Blog Slider Area End -->
             <section class="blog-home section-full">
                 <div class="container">
-                    <h2 style="padding-left:20px;">Make Attendance</h2>
+                    <h2 style="padding-left:20px;">Weekly Attendance Count</h2>
                     <div class="total-blog mt-10">
                         <div class="single-blog text-center row">
                             <div class="col-sm-offset-1 col-sm-10">
@@ -132,27 +133,66 @@
                                     <table>
                                       <thead>
                                         <tr>
-                                          <th>Roll No</th>
+                                          <th>Roll No.</th>
                                           <th>Name</th>
-                                          <th><%= subj%></th>
+                                          <th>Count</th>
+                                          <th>Attendance Count</th>
+                                          <th>Rating</th>
+                                          <th>Month</th>
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        <%for(var i=0; i< stulist.length; i++){%>
+                                        <%  for(var i=0; i< list.length;i++){%>
                                           <tr>
-                                            <td><%= stulist[i].roll_no%></td>
-                                            <td><%= stulist[i].stu_name%></td>
-                                            <td><input type="checkbox" id="<%= stulist[i].stu_id%>" value="<%= stulist[i].stu_id%>"></td>
+                                            <td><%=list[i].roll_no%></td>
+                                            <td><%=list[i].stu_name%></td>
+                                            <td><%=list[i].count%></td>
+                                            <td><%=list[i].acount%></td>
+                                            <td><%=(list[i].acount == 0)? 0 :(list[i].acount/list[i].count)*100 %>%</td>
+                                            <td id="mon<%=i%>"><%=list[i].month%></td>
                                           </tr>
+                                          <%if((i+1)%8==0){ var sumc = 0; var suma = 0; for(var k = i-7;k< 8*Math.ceil(i/8); k++){ sumc += list[k].count; suma +=list[k].acount;}%>
+
+                                            <td colspan="4"> Total</td>
+                                            <td colspan="2"><%= (suma/sumc)*100%> %</td>
+                                          <%}%>
+                                          <script type="text/javascript">
+                                            switch (<%=list[i].month%>) {
+                                              case 1:
+                                                $('#mon<%=i%>').html('December');
+                                                break;
+                                              case 2:
+                                                $('#mon<%=i%>').html('January');
+                                                break;
+                                              case 3:
+                                                $('#mon<%=i%>').html('February');
+                                                break;
+                                              case 4:
+                                                $('#mon<%=i%>').html('March');
+                                                break;
+                                              case 5:
+                                                $('#mon<%=i%>').html('June');
+                                                break;
+                                              case 6:
+                                                $('#mon<%=i%>').html('July');
+                                                break;
+                                              case 7:
+                                                $('#mon<%=i%>').html('August');
+                                                break;
+                                              case 8:
+                                                $('#mon<%=i%>').html('September');
+                                                break;
+                                              default:
+                                                console.log('error');
+                                            }
+                                          </script>
                                         <%}%>
 
 
                                       </tbody>
                                     </table>
                                     <br>
-                                    <div style="margin-left:890px;">
-                                      <input type="button" id="btn" name="btn" value="Save" class="btn btn-primary ">
-                                    </div>
+
                                 </div>
 
                             </div>
@@ -170,7 +210,7 @@
         <!--
         JavaScripts
         ========================== -->
-        <script src="/js/vendor/jquery-2.2.4.min.js"></script>
+
         <!-- <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/vendor/materialize.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
@@ -186,24 +226,3 @@
         <script src="/js/map-init.js"></script>
     </body>
 </html>
-<script type="text/javascript">
-
-$('#btn').click(function () {
-  var att = []
-   <% for (var k=0; k < stulist.length; k++){%>
-     if($('#<%=stulist[k].stu_id%>').prop('checked')) att.push(<%=stulist[k].stu_id%>);
-   <%}%>
-   console.log(att);
-     $.post(
-       '/teacher/assignAtt',
-       {db:'<%=db%>',month:'<%=month%>',subj:'<%=subj%>',list:att,time:'<%=time%>'}
-     ).done(function (res) {
-       if(res.status){
-         alert('success!!!')
-         location.href='/teacher/list';
-       }
-     }).fail(function (err) {
-       console.log(err);
-     })
-});
-</script>

@@ -17,7 +17,12 @@ var Timetable = {
   },
 
   findWithTec:function (params,callback) {
-    var sql = "SELECT subj_name, class FROM timetable WHERE name = ?  AND dept_id = ?";
+    var sql = "SELECT subj_name, class, time FROM timetable WHERE name = ?  AND dept_id = ? AND date_id = ?";
+    return db.query(sql,params,callback);
+  },
+
+  findWithTecA:function (params,callback) {
+    var sql = "SELECT DISTINCT subj_name, class FROM timetable WHERE name = ?  AND dept_id = ? ";
     return db.query(sql,params,callback);
   },
 
