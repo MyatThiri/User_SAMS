@@ -4,21 +4,22 @@
     <style media="screen">
       table,th,td{
         width: 1100px;
-        margin-left: -80px;
+        margin-left: -50px;
         text-align: center;
         border: 1px solid black;
-        height: 35px;
       }
-      th {
-        background-color:  #0000b3;
+      #ta {
+        background-color: #4d4dff;
         color: white;
         height: 50px;
-        font-size: 18px;
+        font-size: 14px;
+
       }
       td {
         color: black;
+        height: 45px;
+        width: 1500px;
       }
-      tr:nth-child(even){background-color:#99b3ff;}
 
       #title {
         margin-top: 30px;
@@ -28,6 +29,13 @@
         /* margin-right:30%; */
         margin-top: 50px
       }
+      #tt {
+        font-size: 12px;
+        color: white;
+        background-color:  #4d4dff;
+        height: 50px;
+      }
+
     </style>
     <script src="/js/vendor/jquery-2.2.4.min.js"></script>
     <header id="header1" class="blue-bg default-header">
@@ -127,15 +135,39 @@
                                   <br>
                                     <table>
                                       <thead>
-                                        <tr>
-                                          <th>Month</th>
+                                        <tr id="ta">
+                                          <th rowspan="2">Month</th>
                                           <% for(var j = 0; j< subj.length; j++){%>
                                             <th colspan="3"><%= subj[j].subj_name%></th>
                                           <%}%>
-                                          <th>Rating</th>
+                                          <th rowspan="2">Rating</th>
+                                        </tr>
+                                        <tr id="tt">
+                                          <th >Total count</th>
+                                          <th>Attendance count</th>
+                                          <th >Total %</th>
+                                          <th >Total count</th>
+                                          <th>Attendance count</th>
+                                          <th >Total %</th>
+                                          <th >Total count</th>
+                                          <th>Attendance count</th>
+                                          <th >Total %</th>
+                                          <th >Total count</th>
+                                          <th>Attendance count</th>
+                                          <th >Total %</th>
+                                          <th >Total count</th>
+                                          <th>Attendance count</th>
+                                          <th >Total %</th>
+                                          <th >Total count</th>
+                                          <th>Attendance count</th>
+                                          <th >Total %</th>
+                                          <th >Total count</th>
+                                          <th>Attendance count</th>
+                                          <th >Total %</th>
                                         </tr>
                                       </thead>
                                       <tbody>
+
                                         <% var allc = []; var alla = [];  for(var p=0; p<= subj.length; p++){ allc[p]=0;alla[p]=0;} %>
                                         <%for(var k =0; k< data.length; k++){ var sumc = 0; var suma = 0; %>
 
@@ -186,8 +218,8 @@
                                           </script>
                                           <% console.log(alla[k],allc[k])%>
                                         <%}%>
-                                        <tr style="background-color:#ffff66; height:50px;">
-                                          <td>Total</td>
+                                        <tr style="background-color:#ffff66; height:60px;">
+                                          <td>Overall total %</td>
                                           <% var tola = 0;var tolc = 0; for(var b =0; b< subj.length; b++){  tola += alla[b]; tolc += allc[b];%>
                                             <td><%= allc[b] %></td>
                                             <td><%= alla[b] %></td>

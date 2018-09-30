@@ -28,6 +28,11 @@
         /* margin-right:30%; */
         margin-top: 50px
       }
+      #to {
+        height: 50px;
+        font-size: 18px;
+        font-family: Arial;
+      }
     </style>
     <script src="/js/vendor/jquery-2.2.4.min.js"></script>
     <header id="header1" class="blue-bg default-header">
@@ -46,7 +51,7 @@
                         <ul id="mobile" class="main-menu  hidden-xs">
                             <li class="my-active"><a href="/teacher/home">Home</a>
                             </li>
-                            
+
                             <li><a href="#">Teacher</a>
                                 <ul class="sub-menu">
                                     <li><a href="/teacher/list" >Attendance List</a></li>
@@ -120,7 +125,7 @@
             <!-- Blog Slider Area End -->
             <section class="blog-home section-full">
                 <div class="container">
-                    <h2 style="padding-left:20px;">Weekly Attendance Count</h2>
+                    <h2 style="padding-left:20px;">Monthly Attendance Count</h2>
                     <div class="total-blog mt-10">
                         <div class="single-blog text-center row">
                             <div class="col-sm-offset-1 col-sm-10">
@@ -137,6 +142,7 @@
                                         </tr>
                                       </thead>
                                       <tbody>
+                                        
                                         <%  for(var i=0; i< list.length;i++){%>
                                           <tr>
                                             <td><%=list[i].roll_no%></td>
@@ -148,8 +154,8 @@
                                           </tr>
                                           <%if((i+1)%8==0){ var sumc = 0; var suma = 0; for(var k = i-7;k< 8*Math.ceil(i/8); k++){ sumc += list[k].count; suma +=list[k].acount;}%>
 
-                                            <td colspan="4"> Total</td>
-                                            <td colspan="2"><%= (suma/sumc)*100%> %</td>
+                                            <td id="to" colspan="4"> Total</td>
+                                            <td id="to" colspan="2"><%= (suma/sumc)*100%> %</td>
                                           <%}%>
                                           <script type="text/javascript">
                                             switch (<%=list[i].month%>) {
