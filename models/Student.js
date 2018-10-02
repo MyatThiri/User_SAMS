@@ -28,7 +28,8 @@ var Student = {
   },
 
   update: function(params, callback) {
-    var sql = "UPDATE student SET name =?,roll_no =?, email =?,gender =?,ph_number =?,dept_id =?,class =?,updated = NOW() WHERE sid = ?";
+    var sql = "UPDATE student SET password = ? ,updated = NOW() WHERE sid = ?";
+    params[0] = bcrypt.hashSync(params[0],bcrypt.genSaltSync(8), null);
     return db.query(sql,params,callback);
   },
 

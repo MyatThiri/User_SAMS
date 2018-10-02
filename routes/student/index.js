@@ -9,7 +9,7 @@ var FindDB = require('../../models/FindDB');
 //student role check
 
 router.get('/', function(req,res){
-  res.render('student/home', {title:'Student Home'});
+  res.render('student/home', {title:'Student Home',sid:req.session.student.sid});
 });
 
 router.get('/monthly', function(req,res,next){
@@ -30,7 +30,7 @@ router.get('/monthly', function(req,res,next){
           att.push([rtn3[b].subj_name+'_count',rtn3[b].subj_name+'_acount']);
         }
         console.log('./,mn',att);
-        res.render('student/monthly-attendance', {title:'Monthly Attendance Percetage',data:rtn2,subj:rtn3,classN:dbName,stu:req.session.student.name,mon:att});
+        res.render('student/monthly-attendance', {title:'Monthly Attendance Percetage',data:rtn2,subj:rtn3,classN:dbName,stu:req.session.student.name,mon:att,sid:req.session.student.sid});
       });
 
     });
@@ -69,13 +69,27 @@ router.get('/timetable', function(req,res,next){
     Timetable.findClass(classN,function (err2,rtn2) {
       if(err2) next (err2);
       console.log(rtn2);
-      res.render('student/timetable', {title:'Timetable',list:rtn2});
+      res.render('student/timetable', {title:'Timetable',list:rtn2,sid:req.session.student.sid});
     });
   });
 });
 
 /*Get password*/
-router.get('/change', function(req,res,next){
-  res.render('student/password', {title: 'Change Password'});
-})
+router.get('/change/:sid', function(req,res,next){
+  Student.findById(req.params.sid,function(err,student){
+    if (err) throw err;
+    if(student.length == 0) next (new Error('Student data not found!'));
+    res.render('student/password', {title: 'Change Password', student: student[0]});
+  });
+});
+
+/* Post password */
+router.post('/change', function(req,res,next){
+  var params = [req.body.password,req.session.student.sid];
+  Student.update(params, function(sstudent,studentt){
+    if (sstudent) throw sstudent;
+    req.flash('info', 'Success');
+    res.redirect('/student')
+  });
+});
 module.exports = router;
