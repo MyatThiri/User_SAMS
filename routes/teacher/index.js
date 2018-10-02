@@ -49,7 +49,7 @@ router.get('/make/:id', function(req,res,next){
         FindDB.find(req.params.id,a, function (err4,rtn4) {
           if(err4) next(err4);
           console.log('vnvnvnvn',rtn4);
-          res.render('teacher/make-attendance',{stulist:rtn4,subj:req.query.s,time:req.query.t,db:req.params.id,month:a});
+          res.render('teacher/make-attendance',{stulist:rtn4,subj:req.query.s,time:req.query.t,db:req.params.id,month:a,tid:req.session.teacher.tid});
         });
 });
 
@@ -87,7 +87,7 @@ router.get('/list',function(req,res,next){
       }
       var data = (rtn2.length ==0)? '0' : rtn2;
       console.log(data);
-      res.render('teacher/attendance-list', {title: 'Attendance List',list:data,dept:rtn[0].dept_id, ca_list: ca_list});
+      res.render('teacher/attendance-list', {title: 'Attendance List',list:data,dept:rtn[0].dept_id, ca_list: ca_list,tid:req.session.teacher.tid});
     });
   });
 });
@@ -127,7 +127,7 @@ router.get('/monthly',function(req,res,next){
       FindDB.findAtt(rtn2[0].subj_name,db,function (err3,rtn3) {
         if(err3) next(err3);
         console.log(rtn3);
-        res.render('teacher/monthly-attendance',{title: 'monthly Attendance Count',list:rtn3,sub_c:rtn2[0].subj_name+'_count',sub_a:rtn2[0].subj_name+'_acount'});
+        res.render('teacher/monthly-attendance',{title: 'monthly Attendance Count',list:rtn3,sub_c:rtn2[0].subj_name+'_count',sub_a:rtn2[0].subj_name+'_acount',tid:req.session.teacher.tid});
       });
 
     });
