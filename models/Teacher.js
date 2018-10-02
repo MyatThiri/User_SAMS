@@ -12,6 +12,12 @@ var Teacher = {
     var sql = 'SELECT * FROM teacher WHERE tid = ?';
     return db.query(sql, [id], callback);
   },
+  update: function(params, callback) {
+    console.log(bcrypt.hashSync(params[0],bcrypt.genSaltSync(8), null));
+    var sql = "UPDATE teacher SET password = ?, updated = NOW() WHERE tid = ?";
+      params[0] = bcrypt.hashSync(params[0],bcrypt.genSaltSync(8), null);
+    return db.query(sql, params, callback);
+  },
   compare:function(cleartext,encrypted){
     return bcrypt.compareSync(cleartext,encrypted);
   },

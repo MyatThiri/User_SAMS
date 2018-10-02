@@ -74,4 +74,8 @@ router.get('/timetable', function(req,res,next){
   });
 });
 
+/*Get password*/
+router.get('/change', function(req,res,next){
+  res.render('student/password', {title: 'Change Password'});
+})
 module.exports = router;

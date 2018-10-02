@@ -11,7 +11,7 @@ var FindDB = require('../../models/FindDB');
 
 
 router.get('/',function(req,res){
-  res.render('teacher/home', {title: 'Teacher Home'});
+  res.render('teacher/home', {title: 'Teacher Home',tid:req.session.teacher.tid});
 });
 
 /*GET make attendance */
@@ -136,9 +136,26 @@ router.get('/monthly',function(req,res,next){
 });
 
 
-router.get('/password',function(req,res,next){
-  res.render('teacher/password',{title: 'Change Password'});
+/* Get password */
+router.get('/change/:tid', function(req,res,next){
+  Teacher.findById(req.params.tid,function(err,teacher){
+    if (err) throw err;
+    if(teacher.length == 0) next (new Error('Teacher data not found!'));
+    res.render('teacher/password', { title: 'Change Password', teacher: teacher[0]});
+  });
+});
+
+/* Post password */
+router.post('/change', function(req,res,next){
+  var params = [req.body.password,req.session.teacher.tid];
+    Teacher.update(params, function(tteacher,teacherr){
+      if(tteacher) throw tteacher;
+      req.flash('info', 'Success');
+      res.redirect('/teacher');
+    });
 });
 router.use('/users',users);
+
+
 
 module.exports = router;
