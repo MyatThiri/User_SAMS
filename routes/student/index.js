@@ -19,7 +19,7 @@ router.get('/monthly', function(req,res,next){
     if(err) next (err);
     var dbName= rtn[0].class.toLowerCase()+rtn[0].dept_name;
     console.log(dbName.toLowerCase());
-    FindDB.findStu(dbName.toLowerCase(),req.session.student.sid,function (err2,rtn2) {
+    FindDB.findStu(dbName.,req.session.student.sid,function (err2,rtn2) {
       if(err2) next(err2);
       console.log('../././,..',rtn2);
       console.log(rtn[0].class,rtn[0].dept_id);
