@@ -17,13 +17,13 @@ router.get('/monthly', function(req,res,next){
   console.log(req.session.student);
   Student.findById(req.session.student.sid,function (err,rtn) {
     if(err) next (err);
-    var dbName= rtn[0].class+rtn[0].dept_name;
+    var dbName= rtn[0].class.toLowerCase()+rtn[0].dept_name;
     console.log(dbName.toLowerCase());
     FindDB.findStu(dbName,req.session.student.sid,function (err2,rtn2) {
       if(err2) next(err2);
       console.log('../././,..',rtn2);
       console.log(rtn[0].class,rtn[0].dept_id);
-      Subj.findByTwo(rtn[0].class,rtn[0].dept_id,function (err3,rtn3) {
+      Subj.findByTwo(rtn[0].class.toLowerCase(),rtn[0].dept_id,function (err3,rtn3) {
         if(err3) next (err3);
         console.log('subj list',rtn3);
         for(var b in rtn3){
