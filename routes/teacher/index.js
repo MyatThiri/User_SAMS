@@ -123,7 +123,7 @@ router.get('/monthly',function(req,res,next){
     Timetable.findWithTecA(params,function (err2,rtn2) {
       if(err2) next(err2);
       console.log(rtn2[0]);
-      var db = rtn2[0].class.tolowerCase()+major;
+      var db = rtn2[0].class.toLowerCase()+major;
       FindDB.findAtt(rtn2[0].subj_name,db,function (err3,rtn3) {
         if(err3) next(err3);
         console.log(rtn3);
