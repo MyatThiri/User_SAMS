@@ -152,11 +152,11 @@
                                             <td><%=(list[i].acount == 0)? 0 :(list[i].acount/list[i].count)*100 %>%</td>
                                             <td id="mon<%=i%>"><%=list[i].month%></td>
                                           </tr>
-                                          <%if((i+1)%8==0){ var sumc = 0; var suma = 0; for(var k = i-7;k< 8*Math.ceil(i/8); k++){ sumc += list[k].count; suma +=list[k].acount;}%>
+                                          <!-- <%if((i+1)%8==0){ var sumc = 0; var suma = 0; for(var k = i-7;k< 8*Math.ceil(i/8); k++){ sumc += list[k].count; suma +=list[k].acount;}%>
 
                                             <td id="to" colspan="4"> Total</td>
                                             <td id="to" colspan="2"><%= (suma/sumc)*100%> %</td>
-                                          <%}%>
+                                          <%}%> -->
                                           <script type="text/javascript">
                                             switch (<%=list[i].month%>) {
                                               case 1:
