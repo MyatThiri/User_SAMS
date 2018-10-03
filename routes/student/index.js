@@ -23,7 +23,7 @@ router.get('/monthly', function(req,res,next){
       if(err2) next(err2);
       console.log('../././,..',rtn2);
       console.log(rtn[0].class,rtn[0].dept_id);
-      Subj.findByTwo(rtn[0].class.toLowerCase(),rtn[0].dept_id,function (err3,rtn3) {
+      Subj.findByTwo(rtn[0].class.toLowerCase(),rtn[0].dept_id.toLowerCase(),function (err3,rtn3) {
         if(err3) next (err3);
         console.log('subj list',rtn3);
         for(var b in rtn3){
