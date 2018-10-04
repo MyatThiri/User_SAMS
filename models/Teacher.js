@@ -12,6 +12,11 @@ var Teacher = {
     var sql = 'SELECT * FROM teacher WHERE tid = ?';
     return db.query(sql, [id], callback);
   },
+  findByName: function(name,callback){
+    console.log('call');
+    var sql = 'SELECT * FROM timetable WHERE name = ?';
+    return db.query(sql, [name], callback);
+  },
   update: function(params, callback) {
     console.log(bcrypt.hashSync(params[0],bcrypt.genSaltSync(8), null));
     var sql = "UPDATE teacher SET password = ?, updated = NOW() WHERE tid = ?";

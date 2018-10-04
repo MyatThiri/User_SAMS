@@ -135,6 +135,14 @@ router.get('/monthly',function(req,res,next){
 
 });
 
+router.get('/timetable',function(req,res,next){
+  Teacher.findByName(req.session.teacher.name,function (err,rtn) {
+    if(err) next (err);
+    res.render('teacher/timetable',{title:'Timetable', list:rtn});
+  });
+
+});
+
 
 /* Get password */
 router.get('/change/:tid', function(req,res,next){
