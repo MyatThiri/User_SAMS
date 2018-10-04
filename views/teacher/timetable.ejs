@@ -7,20 +7,20 @@
         margin-left: -80px;
         text-align: center;
         border: 1px solid black;
-        height: 35px;
+
       }
       th {
-        background-color:  #550080;
-        color: white;
-        height: 55px;
-        font-size: 23px;
+        background-color: #1a1aff;
+        color: black;
+        height: 80px;
+        font-size: 20px;
       }
       td {
         color: black;
-        height: 50px;
-        font-size: 18px;
+        height: 70px;
+        font-size: 16px;
       }
-      tr:nth-child(even){background-color: #eeccff;}
+      tr:nth-child(even){background-color:#809fff;}
 
       #title {
         margin-top: 30px;
@@ -41,37 +41,35 @@
       </div>
     </div>
 
-    <div class="container" id="menu">
-        <div class="navbar-area flex space-between">
-            <div class="right-bar flex">
-                <nav>
-                    <ul id="mobile" class="main-menu  hidden-xs">
-                        <li class="my-active"><a href="/teacher/home">Home</a>
-                        </li>
+        <div class="container" id="menu">
+            <div class="navbar-area flex space-between">
+                <div class="right-bar flex">
+                    <nav>
+                        <ul id="mobile" class="main-menu  hidden-xs">
+                            <li class="my-active"><a href="/teacher/home">Home</a>
+                            </li>
 
-                        <li><a href="#">Teacher</a>
-                            <ul class="sub-menu">
-                                 <li><a href="/teacher/list" >Attendance List</a></li>
-                                <li><a href="/teacher/monthly" >View Monthly Attendance Count</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Password</a>
-                            <ul class="sub-menu">
-                                <li><a href="/teacher/change" >Change Password</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Logout</a>
-                          <ul class="sub-menu">
-                              <li><a href="/" >Logout</a></li>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="search-icon hidden-xs">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            <li><a href="#">Teacher</a>
+                                <ul class="sub-menu">
+                                  <li><a href="/teacher/timetable" >Timetable</a></li>
+                                    <li><a href="/teacher/list" >Attendance List</a></li>
+                                    <li><a href="/teacher/monthly" >View Monthly Attendance Count</a></li>                                  </ul>
+                            </li>
+                            <li><a href="#">Password</a>
+                                <ul class="sub-menu">
+                                    <li><a href="/teacher/change" >Change Password</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Logout</a>
+                              <ul class="sub-menu">
+                                  <li><a href="/logout" >Logout</a></li>
+                            </li>
+                        </ul>
+                    </nav>
+
                 </div>
             </div>
         </div>
-    </div>
     </header>
     <body>
         <div class="search-area">
@@ -122,111 +120,132 @@
             <!-- Blog Slider Area End -->
             <section class="blog-home section-full">
                 <div class="container">
-
-                    <h2 style="padding-left:20px;">Attendance List</h2>
+                    <h2 style="padding-left:20px;">Timetable</h2>
+                    <br>
                     <div class="total-blog mt-10">
                         <div class="single-blog text-center row">
                             <div class="col-sm-offset-1 col-sm-10">
                                 <div class="blog-head mb-20">
-
                                   <table>
-                                      <thead>
-                                        <tr>
-                                          <th>Date</th>
-                                          <th>Time</th>
-                                          <th>Class</th>
-                                          <th>Subject</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                      <% for(let i= 0; i< list.length; i++){
-                                      %>
-                                        <tr>
-                                      <%
-                                        if(list[i].date_id == '1'){
-                                      %>
-                                            <td>Monday</td>
-                                      <%
-                                      }
-                                        else if(list[i].date_id == '2'){
-                                      %>
-                                            <td>Tuesday</td>
-                                      <%
-                                          }
-                                         else if(list[i].date_id == '3'){
-                                      %>
-                                          <td>Wednesday</td>
-                                        <%
-                                          }
-                                          else  if(list[i].date_id == '4'){
-                                        %>
-                                          <td>Thursday</td>
-                                        <%
-                                            }
-                                          else if(list[i].date_id == '5'){
-                                        %>
-                                          <td>Friday</td>
-                                        <%
-                                          }
-                                            else
-                                          {
-                                        %>
-                                            <td>Not selected date</td>
-                                        <% } %>
-                                        <!-- end_for_date -->
-                                        <%
-                                          if(list[i].time == '1'){
-                                        %>
-                                              <td>8:30AM-9:30AM</td>
-                                        <%
-                                        }
-                                          else if(list[i].time == '2'){
-                                        %>
-                                              <td>9:35AM-10:35AM</td>
-                                        <%
-                                            }
-                                           else if(list[i].time == '3'){
-                                        %>
-                                            <td>10:40AM-11:40AM</td>
-                                          <%
-                                            }
-                                            else  if(list[i].time == '4'){
-                                          %>
-                                            <td>12:40PM-1:40PM</td>
-                                          <%
-                                              }
-                                            else if(list[i].time == '5'){
-                                          %>
-                                            <td>1:45PM-2:45PM</td>
-                                            <%
-                                                }
-                                              else if(list[i].time == '6'){
-                                            %>
-                                              <td>2:50PM-3:50PM</td>
-                                          <%
-                                            }
-                                              else
-                                            {
-                                          %>
-                                              <td>Not selected date</td>
-                                          <% } %>
+                                       <thead>
+                                         <tr>
+                                           <th>Date</th>
+                                           <th>Time</th>
+                                           <th>Class</th>
+                                           <th>Subject</th>
+                                         </tr>
+                                       </thead>
+                                       <tbody>
+                                       <% for(let i= 0; i< list.length; i++){
+                                       %>
+                                         <tr>
+                                       <%
+                                         if(list[i].date_id == '1'){
+                                       %>
+                                             <td>Monday</td>
+                                       <%
+                                       }
+                                         else if(list[i].date_id == '2'){
+                                       %>
+                                             <td>Tuesday</td>
+                                       <%
+                                           }
+                                          else if(list[i].date_id == '3'){
+                                       %>
+                                           <td>Wednesday</td>
+                                         <%
+                                           }
+                                           else  if(list[i].date_id == '4'){
+                                         %>
+                                           <td>Thursday</td>
+                                         <%
+                                             }
+                                           else if(list[i].date_id == '5'){
+                                         %>
+                                           <td>Friday</td>
+                                         <%
+                                           }
+                                             else
+                                           {
+                                         %>
+                                             <td>Not selected date</td>
+                                         <% } %>
+                                         <!-- end_for_date -->
+                                         <%
+                                           if(list[i].time == '1'){
+                                         %>
+                                               <td>8:30AM-9:30AM</td>
+                                         <%
+                                         }
+                                           else if(list[i].time == '2'){
+                                         %>
+                                               <td>9:35AM-10:35AM</td>
+                                         <%
+                                             }
+                                            else if(list[i].time == '3'){
+                                         %>
+                                             <td>10:40AM-11:40AM</td>
+                                           <%
+                                             }
+                                             else  if(list[i].time == '4'){
+                                           %>
+                                             <td>12:40PM-1:40PM</td>
+                                           <%
+                                               }
+                                             else if(list[i].time == '5'){
+                                           %>
+                                             <td>1:45PM-2:45PM</td>
+                                             <%
+                                                 }
+                                               else if(list[i].time == '6'){
+                                             %>
+                                               <td>2:50PM-3:50PM</td>
+                                           <%
+                                             }
+                                               else
+                                             {
+                                           %>
+                                               <td>Not selected date</td>
+                                           <% } %>
 
-                                            <td><%=list[i].class; %></td>
-                                            <td><%=list[i].subj_name; %></td>
-                                          </tr>
-                                        <% } %>
-                                        </tbody>
-                                      </table>
-                                    </div>
-                                  </div>
+                                             <td><%=list[i].class; %></td>
+                                             <td><%=list[i].subj_name; %></td>
+                                           </tr>
+                                         <% } %>
+                                         </tbody>
+                                       </table>
+
                                 </div>
-                              </div>
+
                             </div>
-                          </section>
+                        </div>
 
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer Area Start -->
+
+        <!-- Footer Area End -->
+
+
+        <!--
+        JavaScripts
+        ========================== -->
+
+        <!-- <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/vendor/materialize.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.sticky.js"></script>
+        <script src="js/jquery.slicknav.min.js"></script> -->
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqCaX4fFEQRiTJoeclXKZRaFh2fYfps_Y&callback=initMap"></script>
+        <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script> -->
+        <!-- <script src="js/jquery.nice-select.js"></script> -->
+        <!-- <script src="js/jquery.jCounter-0.1.4.js"></script>
+
+        <script src="js/main.js"></script> -->
+        <script src="/js/minified/minified.js"></script>
+        <script src="/js/map-init.js"></script>
     </body>
-  </html>
-<script type="text/javascript">
 
-
-</script>
+</html>
