@@ -126,7 +126,7 @@
             <!-- Blog Slider Area End -->
             <section class="blog-home section-full">
                 <div class="container">
-                    <h2 style="padding-left:20px;">Monthly Attendance Count</h2>
+                    <h2 style="padding-left:20px;">Monthly Attendance Percetage</h2>
                     <div class="total-blog mt-10">
                         <div class="single-blog text-center row">
                             <div class="col-sm-offset-1 col-sm-10">
@@ -138,7 +138,7 @@
                                           <th>Name</th>
                                           <th>Count</th>
                                           <th>Attendance Count</th>
-                                          <th>Rating</th>
+                                          <th>Roll call %</th>
                                           <th>Month</th>
                                         </tr>
                                       </thead>
@@ -150,7 +150,7 @@
                                             <td><%=list[i].stu_name%></td>
                                             <td><%=list[i].count%></td>
                                             <td><%=list[i].acount%></td>
-                                            <td><%=(list[i].acount == 0)? 0 :(list[i].acount/list[i].count)*100 %>%</td>
+                                            <td><%=(list[i].acount == 0)? 0 :((list[i].acount/list[i].count)*100).toFixed(2) %>%</td>
                                             <td id="mon<%=i%>"><%=list[i].month%></td>
                                           </tr>
                                           <!-- <%if((i+1)%8==0){ var sumc = 0; var suma = 0; for(var k = i-7;k< 8*Math.ceil(i/8); k++){ sumc += list[k].count; suma +=list[k].acount;}%>

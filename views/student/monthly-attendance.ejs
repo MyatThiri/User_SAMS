@@ -3,7 +3,7 @@
     <% include ../partial/head %>
     <style media="screen">
       table,th,td{
-        width: 1100px;
+        width: 1200px;
         margin-left: -50px;
         text-align: center;
         border: 1px solid black;
@@ -30,10 +30,11 @@
         margin-top: 50px
       }
       #tt {
-        font-size: 12px;
+        font-size: 10px;
         color: white;
         background-color:  #4d4dff;
         height: 50px;
+        width: 150px;
       }
 
     </style>
@@ -129,7 +130,7 @@
             <!-- Blog Slider Area End -->
             <section class="blog-home section-full">
                 <div class="container">
-                    <h2 style="padding-left:20px;">Monthly Attendance Percetage Count</h2>
+                    <h2 style="padding-left:20px;">Attendance Percetage Count</h2>
                     <br>
                     <div class="total-blog mt-10">
                         <div class="single-blog text-center row">
@@ -145,28 +146,28 @@
                                           <% for(var j = 0; j< subj.length; j++){%>
                                             <th colspan="3"><%= subj[j].subj_name%></th>
                                           <%}%>
-                                          <th rowspan="2">Rating</th>
+                                          <th rowspan="2">Roll Call by %</th>
                                         </tr>
                                         <tr id="tt">
-                                          <th >Total count</th>
+                                          <th >Total count </th>
                                           <th>Attendance count</th>
                                           <th >Total %</th>
-                                          <th >Total count</th>
+                                          <th >Total count </th>
                                           <th>Attendance count</th>
                                           <th >Total %</th>
-                                          <th >Total count</th>
+                                          <th >Total count </th>
                                           <th>Attendance count</th>
                                           <th >Total %</th>
-                                          <th >Total count</th>
+                                          <th >Total count </th>
                                           <th>Attendance count</th>
                                           <th >Total %</th>
-                                          <th >Total count</th>
+                                          <th >Total count </th>
                                           <th>Attendance count</th>
                                           <th >Total %</th>
-                                          <th >Total count</th>
+                                          <th >Total count </th>
                                           <th>Attendance count</th>
                                           <th >Total %</th>
-                                          <th >Total count</th>
+                                          <th >Total count </th>
                                           <th>Attendance count</th>
                                           <th >Total %</th>
                                         </tr>
@@ -185,7 +186,7 @@
                                               <% suma += data[k][mon[b][1]];  %>
                                               <td><%=data[k][mon[b][0]]%></td>
                                               <td><%=data[k][mon[b][1]]%></td>
-                                              <td ><%=(data[k][mon[b][1]] == 0)? 0:(data[k][mon[b][1]]/data[k][mon[b][0]])*100%>%</td>
+                                              <td ><%=(data[k][mon[b][1]] == 0)? 0:((data[k][mon[b][1]]/data[k][mon[b][0]])*100).toFixed(2)%>%</td>
                                             <%}%>
 
                                             <td><%=(suma == 0)? 0 :((suma/sumc)*100).toFixed(2) %> %</td>
@@ -224,7 +225,7 @@
                                           <% console.log(alla[k],allc[k])%>
                                         <%}%>
                                         <tr style="background-color:#ffff66; height:60px;">
-                                          <td>Overall total %</td>
+                                          <td>Overall roll call %</td>
                                           <% var tola = 0;var tolc = 0; for(var b =0; b< subj.length; b++){  tola += alla[b]; tolc += allc[b];%>
                                             <td><%= allc[b] %></td>
                                             <td><%= alla[b] %></td>
@@ -233,8 +234,6 @@
                                           <% console.log(tola,tolc)%>
                                           <td><%= ((tola/tolc)*100).toFixed(2)%> %</td>
                                         </tr>
-
-
                                     </tbody>
                                     </table>
                                     <br>
