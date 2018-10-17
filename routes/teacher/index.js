@@ -79,6 +79,7 @@ router.get('/list',function(req,res,next){
   Teacher.findById(req.session.teacher.tid,function (err,rtn) {
     if(err) next(err);
     var params = [rtn[0].name,rtn[0].dept_id,day];
+    console.log('////=>=>',params);
     Timetable.findWithTec(params,function (err2,rtn2) {
       if(err2) next (err2);
       console.log(rtn2);
